@@ -1,9 +1,9 @@
+import { AppRouter } from "./router"
 
 function CalendarApp() {
-
   return (
     <>
-      <h1>Hola</h1>
+      <AppRouter />
     </>
   )
 }

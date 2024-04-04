@@ -1,6 +1,7 @@
 import { NavBar } from '../'
 
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar'
+import 'react-big-calendar/lib/css/react-big-calendar.css'
 import enUS from 'date-fns/locale/en-US'
 import { addHours, format, parse, startOfWeek, getDay } from 'date-fns'
 
@@ -38,7 +39,7 @@ export const CalendarPage = () => {
                 events={events}
                 startAccessor="start"
                 endAccessor="end"
-                style={{ height: 500 }}
+                style={{ height: 'calc( 100vh - 80px )' }}
             />
         </>
     )

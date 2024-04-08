@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Modal from 'react-modal';
+import '../../styles.css'
 
 const customStyles = {
   content: {
@@ -31,12 +32,22 @@ export const Calendarmodal = () => {
         style={customStyles}
         
         className='modal'
-        overlayClassName='modal-fond'
+        overlayClassName='modal-fondo'
         closeTimeoutMS={ 200 }
       >
-        <h2>Hola Mundooooo!!!!</h2>
+        <h2>Nuevo evento</h2>
         <hr />
-        <p>Párrafo del modal..</p>
+        <form className='container'>
+          <div className="form-group mb-2">
+            <label>Fecha y hora de inicio</label>
+            <input type="text" placeholder="Fecha inicio" className="form-control" />
+          </div>
+
+          <div className="form-group mb-2">
+            <label>Fecha y hora de fin</label>
+            <input type="text" placeholder="Fecha fin" className="form-control" />
+          </div>
+        </form>
       </Modal>
     
     )

@@ -13,7 +13,7 @@ const events = [{
     bgColor: '#fafafa',
     user:{
         id: '123',
-        name: 'Yancy'
+        name: 'Elias'
     }
 }]
 

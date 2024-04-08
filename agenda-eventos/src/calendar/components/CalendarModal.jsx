@@ -1,5 +1,8 @@
+import { addHours } from 'date-fns';
 import { useState } from 'react';
 import Modal from 'react-modal';
+import Datepicker from 'react-datepicker';
+import 'react-datepicker'
 
 const customStyles = {
   content: {
@@ -18,6 +21,22 @@ export const Calendarmodal = () => {
 
     //estado del modal
     const [ isOpen, setIsOpen ] = useState(true)
+
+    const [ formValues, setFormValues ] = useState({
+      title: 'Titulo evento',
+      notes: 'Descripcion del evento',
+      start: new Date(),
+      end: addHours( new Date(), 2 )
+    })
+
+    const onInputChange = ({ target }) => {
+      setFormValues({
+        ...formValues,
+        [ target.name ]: target.value
+      })
+    }
+
+    const onDateChanged = (event, changing) 
 
     const onCloseModal = () => {
         //console.log('Cerrando el Modal...')
@@ -40,6 +59,12 @@ export const Calendarmodal = () => {
           <div className="form-group mb-2">
             <label>Fecha y hora de inicio</label>
             <input type="text" placeholder="Fecha inicio" className="form-control" />
+            <Datepicker
+              minDate={ formValues.start }
+              selected={ formValues.end }
+              className='form-control'
+              onChange={ (event) => onDateChanged(event, end) }
+            />
           </div>
 
           <div className="form-group mb-2">
@@ -54,7 +79,11 @@ export const Calendarmodal = () => {
               type="text"
               className="form-control"
               placeholder='Titulo del evento'
-              autoComplete='off' />
+              autoComplete='off' 
+              name='title'
+              value={ formValues.title }
+              onChange={ onInputChange }
+            />
             <small className='form-text text-muted'>Una descripcion corta</small>
           </div>
 
@@ -62,9 +91,11 @@ export const Calendarmodal = () => {
             <textarea 
               type='text'
               className='form-control'
-              name="notes" 
+              name='notes' 
               rows="5"
               placeholder='Notas'
+              value={ formValues.notes }
+              onChange={ onInputChange }
               >
 
             </textarea>

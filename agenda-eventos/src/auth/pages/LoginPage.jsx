@@ -1,7 +1,7 @@
 import './LoginPage.css'
 
 export const LoginPage = () => {
-    return (
+    return(
         <div className="container login-container">
             <div className="row">
                 <div className="col-md-6 login-form-1">
@@ -15,7 +15,7 @@ export const LoginPage = () => {
                         </div>
                         <div className="form-group mb-2">
                             <input type="submit"className="btnSubmit"value="Login"/>
-                        </div>
+                            </div>
                     </form>
                 </div>
                 <div className="col-md-6 login-form-2">

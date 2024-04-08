@@ -1,1 +1,1 @@
-export * from './pages/LoginPage' //importar todo lo de LoginPage
+export * from './pages/LoginPage'; // importar lo de loginpage

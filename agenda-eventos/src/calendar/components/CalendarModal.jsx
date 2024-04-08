@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Modal from 'react-modal';
-import '../../styles.css'
 
 const customStyles = {
   content: {
@@ -47,6 +46,38 @@ export const Calendarmodal = () => {
             <label>Fecha y hora de fin</label>
             <input type="text" placeholder="Fecha fin" className="form-control" />
           </div>
+
+          <hr />
+          <div className="form-group mb-2">
+            <label>Titulo y notas</label>
+            <input 
+              type="text"
+              className="form-control"
+              placeholder='Titulo del evento'
+              autoComplete='off' />
+            <small className='form-text text-muted'>Una descripcion corta</small>
+          </div>
+
+          <div className="form-group mb-2">
+            <textarea 
+              type='text'
+              className='form-control'
+              name="notes" 
+              rows="5"
+              placeholder='Notas'
+              >
+
+            </textarea>
+            <small className='form-text text-muted'>Informacion adicional</small>
+          </div>
+
+          <button 
+            className="btn btn-outline-primary btn-block"
+            type='submit'>
+              <i className="far fa-save"></i>
+              &nbsp;
+              <span>Guardar</span>
+          </button>
         </form>
       </Modal>
     

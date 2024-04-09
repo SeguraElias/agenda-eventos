@@ -1,10 +1,11 @@
-import { addHours } from 'date-fns';
+import { addHours, differenceInSeconds } from 'date-fns';
 import { useState } from 'react';
 import Modal from 'react-modal';
 import Datepicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { es } from 'date-fns/locale/es';
 registerLocale('es', es);
+import Swal from 'sweetalert2'
 
 const customStyles = {
   content: {
@@ -52,6 +53,21 @@ export const Calendarmodal = () => {
 
     const onSubmit = (event) => {
       event.preventDefault()
+
+      const difference = differenceInSeconds( formValues.end, formValues.start )
+      console.log(difference)
+
+      if (isNaN( difference ) || difference <= 0){
+        console.log('Error en las fechas')
+        return
+      }
+
+      if ( formValues.title.length <= 0 ){
+        console.log('Es necesario indicar un titulo al evento')
+        return
+      }
+
+      console.log(formValues)
     }
 
     return(

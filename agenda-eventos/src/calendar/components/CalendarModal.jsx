@@ -1,8 +1,10 @@
 import { addHours } from 'date-fns';
 import { useState } from 'react';
 import Modal from 'react-modal';
-import Datepicker from 'react-datepicker';
-import 'react-datepicker'
+import Datepicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { es } from 'date-fns/locale/es';
+registerLocale('es', es);
 
 const customStyles = {
   content: {
@@ -36,11 +38,20 @@ export const Calendarmodal = () => {
       })
     }
 
-    const onDateChanged = (event, changing) 
+    const onDateChanged = (event, changing) => {
+      setFormValues({
+        ...formValues,
+        [ changing ]: event
+      })
+    }
 
     const onCloseModal = () => {
         //console.log('Cerrando el Modal...')
         setIsOpen(false)
+    }
+
+    const onSubmit = (event) => {
+      event.preventDefault()
     }
 
     return(
@@ -55,21 +66,32 @@ export const Calendarmodal = () => {
       >
         <h2>Nuevo evento</h2>
         <hr />
-        <form className='container'>
+        <form className='container' onSubmit={ onSubmit }>
           <div className="form-group mb-2">
             <label>Fecha y hora de inicio</label>
-            <input type="text" placeholder="Fecha inicio" className="form-control" />
             <Datepicker
-              minDate={ formValues.start }
-              selected={ formValues.end }
+              selected={ formValues.start } //fecha de inicio seleccionada
               className='form-control'
-              onChange={ (event) => onDateChanged(event, end) }
+              onChange={ (event) => onDateChanged(event, 'start') }
+              dateFormat='Pp'
+              showTimeSelect
+              locale='es'
+              timeCaption='Hora'
             />
           </div>
 
           <div className="form-group mb-2">
             <label>Fecha y hora de fin</label>
-            <input type="text" placeholder="Fecha fin" className="form-control" />
+            <Datepicker
+              minDate={ formValues.start } // para no seleccionar fecha inferior a la de inicio
+              selected={ formValues.end } //fecha de inicio seleccionada
+              className='form-control'
+              onChange={ (event) => onDateChanged(event, 'end') }
+              dateFormat='Pp'
+              showTimeSelect
+              locale='es'
+              timeCaption='Hora'
+            />
           </div>
 
           <hr />
@@ -104,10 +126,11 @@ export const Calendarmodal = () => {
 
           <button 
             className="btn btn-outline-primary btn-block"
-            type='submit'>
-              <i className="far fa-save"></i>
-              &nbsp;
-              <span>Guardar</span>
+            type='submit'
+          >
+            <i className="far fa-save"></i>
+            &nbsp;
+            <span>Guardar</span>
           </button>
         </form>
       </Modal>

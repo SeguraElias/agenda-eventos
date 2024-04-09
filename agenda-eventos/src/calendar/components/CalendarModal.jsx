@@ -5,6 +5,7 @@ import Datepicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { es } from 'date-fns/locale/es';
 registerLocale('es', es);
+import Swal from 'sweetalert2'
 
 const customStyles = {
   content: {

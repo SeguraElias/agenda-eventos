@@ -1,5 +1,5 @@
 import { addHours, differenceInSeconds } from 'date-fns';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import Modal from 'react-modal';
 import Datepicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -25,12 +25,25 @@ export const Calendarmodal = () => {
     //estado del modal
     const [ isOpen, setIsOpen ] = useState(true)
 
+    const [ formSubmitted, setFormSbmitted ] = useState(false)
+
     const [ formValues, setFormValues ] = useState({
       title: 'Titulo evento',
       notes: 'Descripcion del evento',
       start: new Date(),
       end: addHours( new Date(), 2 )
     })
+
+    // utilizamos el useMemo
+    const titleClass = useMemo(() => {
+
+      if ( !formSubmitted ) return ''
+
+      return ( formValues.title.length > 0 ) 
+      ? 'is-valid' 
+      : 'is-invalid'
+
+    }, [ formValues.title, formSubmitted ])
 
     const onInputChange = ({ target }) => {
       setFormValues({
@@ -45,7 +58,7 @@ export const Calendarmodal = () => {
         [ changing ]: event
       })
     }
-
+    
     const onCloseModal = () => {
         //console.log('Cerrando el Modal...')
         setIsOpen(false)
@@ -53,12 +66,13 @@ export const Calendarmodal = () => {
 
     const onSubmit = (event) => {
       event.preventDefault()
+      setFormSbmitted(true)
 
       const difference = differenceInSeconds( formValues.end, formValues.start )
       console.log(difference)
 
       if (isNaN( difference ) || difference <= 0){
-        console.log('Error en las fechas')
+        Swal.fire('Las fechas ingresadas no coinciden', 'error')
         return
       }
 
@@ -101,7 +115,7 @@ export const Calendarmodal = () => {
             <Datepicker
               minDate={ formValues.start } // para no seleccionar fecha inferior a la de inicio
               selected={ formValues.end } //fecha de inicio seleccionada
-              className='form-control'
+              className='form-control '
               onChange={ (event) => onDateChanged(event, 'end') }
               dateFormat='Pp'
               showTimeSelect
@@ -115,7 +129,7 @@ export const Calendarmodal = () => {
             <label>Titulo y notas</label>
             <input 
               type="text"
-              className="form-control"
+              className={`form-control ${ titleClass }`}
               placeholder='Titulo del evento'
               autoComplete='off' 
               name='title'

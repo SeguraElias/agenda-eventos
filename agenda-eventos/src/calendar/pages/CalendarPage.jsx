@@ -6,17 +6,17 @@ import {getMessagesEs, localizer} from '../../helpers'
 import { useState } from 'react';
 import { useUiStore } from '../../hooks';
 
-const events = [{
-    title: 'Cumpleaños del Team Leader',
-    notes: 'Comprarle una taza de spiderman pequeño',
-    start: new Date(),
-    end: addHours(new Date(), 2),
-    bgColor: '#fafafa',
-    user:{
-        id: '123',
-        name: 'Elias'
-    }
-}]
+// const events = [{
+//     title: 'Cumpleaños del Team Leader',
+//     notes: 'Comprarle una taza de spiderman pequeño',
+//     start: new Date(),
+//     end: addHours(new Date(), 2),
+//     bgColor: '#fafafa',
+//     user:{
+//         id: '123',
+//         name: 'Elias'
+//     }
+// }]
 
 
 export const CalendarPage = () => {

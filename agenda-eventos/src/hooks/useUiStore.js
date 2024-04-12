@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { onOpenDateModal } from '../store/ui/uiSlice'
+import { onCloseDateModal, onOpenDateModal } from '../store/ui/uiSlice'
 
 export const useUiStore = () => {
     const { 
@@ -8,8 +8,14 @@ export const useUiStore = () => {
 
     const dispatch = useDispatch()
 
+    // funcion para abrir modal
     const openDateModal = () => {
         dispatch( onOpenDateModal() )
+    }
+
+    // funcion para cerrar modal
+    const closeDateModal = () => {
+        dispatch( onCloseDateModal() )
     }
 
     return {
@@ -18,5 +24,6 @@ export const useUiStore = () => {
 
         // * Metodos
         openDateModal,
+        closeDateModal,
     }
 }

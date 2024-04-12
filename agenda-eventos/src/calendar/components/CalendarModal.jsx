@@ -27,7 +27,7 @@ export const Calendarmodal = () => {
     // estado del modal
     // const [ isOpen, setIsOpen ] = useState(true)
 
-    const { isDateModalOpen } = useUiStore()
+    const { isDateModalOpen, closeDateModal } = useUiStore()
 
     const [ formSubmitted, setFormSbmitted ] = useState(false)
 
@@ -64,7 +64,7 @@ export const Calendarmodal = () => {
     }
     
     const onCloseModal = () => {
-        console.log('Cerrando el Modal...')
+        closeDateModal()
         //setIsOpen(false)
     }
 

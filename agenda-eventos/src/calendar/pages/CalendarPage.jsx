@@ -1,10 +1,9 @@
 import { Calendar } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-import { addHours } from 'date-fns';
 import { CalendarEvent, Navbar , Calendarmodal} from '../';
 import {getMessagesEs, localizer} from '../../helpers'
 import { useState } from 'react';
-import { useUiStore } from '../../hooks';
+import { useUiStore, useCalendarStore } from '../../hooks';
 
 // const events = [{
 //     title: 'Cumpleaños del Team Leader',
@@ -22,6 +21,8 @@ import { useUiStore } from '../../hooks';
 export const CalendarPage = () => {
 
     const { openDateModal } = useUiStore()
+
+    const { events, setActiveEvent } = useCalendarStore()
 
     const [ lastView, setLastView] = useState(localStorage.getItem('lastView') || 'agenda');
 
@@ -42,7 +43,7 @@ export const CalendarPage = () => {
         openDateModal()
     }
     const onSelect = (event) => {
-        console.log({click: event})
+        setActiveEvent( event )
     }
     const onViewChange = (event) => {
         localStorage.setItem('lastView', event)
@@ -55,7 +56,7 @@ export const CalendarPage = () => {
             <Calendar
                 culture='es'
                 localizer={localizer}
-                events={events}
+                events={ events }
                 startAccessor="start"
                 endAccessor="end"
                 style={{ height: 'calc(100vh - 80px)' }}

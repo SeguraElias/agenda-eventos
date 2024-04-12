@@ -3,6 +3,7 @@ import { uiSlice } from "../ui/uiSlice";
 import { addHours } from "date-fns";
 
 const tempEvent = {
+    _id: new Date().getTime(),
     title: 'Cumpleaños de Elias',
     notes: 'Comprarle un AE86 Trueno',
     start: new Date(),
@@ -18,16 +19,18 @@ export const calendarSlice = createSlice({
     name: 'calendar',
 
     initialState: {
-        events: [],
+        events: [
+            tempEvent
+        ],
         activeEvent: null
     },
 
     reducers: {
         // aqui creamos las acciones
-        increment: (state) => {
-            state.counter += 1
+        onSetActiveEvent: (state, { payload } ) => {
+            
         },
     }
 })
 
-export const { increment } = uiSlice.actions
+export const { onSetActiveEvent } = uiSlice.actions

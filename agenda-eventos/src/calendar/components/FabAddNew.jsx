@@ -16,7 +16,7 @@ export const FabAddNew = () => {
             bgColor: '#fafafa',
             user:{
                 id: '123',
-                name: 'Virgilio'
+                name: 'Elias'
             }
         })
 

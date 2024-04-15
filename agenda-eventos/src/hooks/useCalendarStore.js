@@ -30,7 +30,8 @@ export const  useCalendarStore = () => {
       activeEvent,
 
       //  *Metodos
-      setActiveEvent
+      setActiveEvent,
+      startSavingEvent,
     }
 }
 

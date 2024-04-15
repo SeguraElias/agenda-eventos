@@ -1,80 +1,70 @@
 import { Calendar } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-import { CalendarEvent, Navbar , Calendarmodal} from '../';
-import {getMessagesEs, localizer} from '../../helpers'
+import { CalendarEvent, CalendarModal, Navbar, FabAddNew } from '../';
+import {localizer, getMessagesES} from '../../helpers'
 import { useState } from 'react';
-import { useUiStore, useCalendarStore } from '../../hooks';
-
-// const events = [{
-//     title: 'Cumpleaños del Team Leader',
-//     notes: 'Comprarle una taza de spiderman pequeño',
-//     start: new Date(),
-//     end: addHours(new Date(), 2),
-//     bgColor: '#fafafa',
-//     user:{
-//         id: '123',
-//         name: 'Elias'
-//     }
-// }]
+import { useCalendarStore, useUiStore } from '../../hooks';
 
 
 export const CalendarPage = () => {
 
-    const { openDateModal } = useUiStore()
+    const {openDateModal } = useUiStore(); //TODO: usar el custom hook de uiStore
 
-    const { events, setActiveEvent } = useCalendarStore()
+    const {events, setActiveEvent} = useCalendarStore(); // TODO: uso de calendarstore
 
-    const [ lastView, setLastView] = useState(localStorage.getItem('lastView') || 'agenda');
+    const [lastView, setLastView] = useState(localStorage.getItem('LastView') || 'agenda');
 
     const eventStyleGetter = (event, start, end, isSelected) => {
-        
-        const style = {
+        const style= {
             backgroundColor: '#527375',
             borderRadius: '0px',
+            opacity: '0.8',
             color: 'white'
         }
 
-        return {
-            style
-        }
+        return{style}
+        
     }
 
     const onDoubleClick = (event) => {
-        openDateModal()
+        openDateModal();
     }
+
+    // TODO: setActiveEvent
     const onSelect = (event) => {
-        setActiveEvent( event )
+        setActiveEvent( event );
     }
+
     const onViewChange = (event) => {
-        localStorage.setItem('lastView', event)
-        setLastView( event )
+        localStorage.setItem('LastView', event)
+        setLastView(event);
     }
 
     return(
         <>
             <Navbar/>
+            
             <Calendar
                 culture='es'
                 localizer={localizer}
-                events={ events }
+                events={events}
                 startAccessor="start"
                 endAccessor="end"
                 style={{ height: 'calc(100vh - 80px)' }}
-                messages={getMessagesEs()}
+                messages={getMessagesES()}
                 eventPropGetter={eventStyleGetter}
                 components={{
                     event: CalendarEvent
                 }}
-
-                //colocar los eventos acá
-                onDoubleClickEvent={ onDoubleClick }
-                onSelectEvent={ onSelect }
-                onView = { onViewChange }
-
-                defaultView={ lastView }
-
+                onDoubleClickEvent={onDoubleClick}
+                onSelectEvent={onSelect}
+                onView={onViewChange}
+                defaultView={lastView}
             />
-            <Calendarmodal/>
+
+            <CalendarModal />
+            <FabAddNew />
+
         </>
     )
 }

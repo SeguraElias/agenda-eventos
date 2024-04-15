@@ -1,16 +1,16 @@
-export const getMessagesEs = () => {
+export const getMessagesES = () => {
     return {
         previous: '<',
         next: '>',
-        allDay: 'Todo el día',
+        allDay: 'Todo el dia',
         today: 'Hoy',
         month: 'Mes',
         week: 'Semana',
-        day: 'Día',
+        day: 'Dia',
         agenda: 'Agenda',
         date: 'Fecha',
         time: 'Hora',
         event: 'Evento',
-        noEventsInRange: 'No hay eventos en este rango'
+        noEventsInRange: 'No hay eventos en este rango',
     }
 }

@@ -10,13 +10,13 @@ export const FabAddNew = () => {
 
         setActiveEvent({
             title: 'Hola',
-            notes: 'Insane',
+            notes: 'jeje',
             start: new Date(),
             end: addHours(new Date(), 2),
             bgColor: '#fafafa',
             user:{
                 id: '123',
-                name: 'Virgilio'
+                name: 'Elias'
             }
         })
 

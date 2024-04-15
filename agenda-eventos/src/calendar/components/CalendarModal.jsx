@@ -28,8 +28,8 @@ export const CalendarModal = () => {
     // estado desde nuestro custoom hook
     const { isDateModalOpen, closeDateModal } = useUiStore();
 
-    // TODO: extraer las dependencias que nos interesan de useCalendarStore
-    const { activeEvent } = useCalendarStore();
+    // extraer la funcion que inicia el proceso de grabacion
+    const { activeEvent, startSavingEvent } = useCalendarStore()
 
     //nuevo estado para cuando se ingrese el evento
     const [formSubmitted, setFormSubmitted] = useState(false)
@@ -78,7 +78,7 @@ export const CalendarModal = () => {
         closeDateModal();
     }
 
-    const onSubmit = (event) => {
+    const onSubmit = async (event) => {
         event.preventDefault();
         setFormSubmitted(true)
 
@@ -103,6 +103,13 @@ export const CalendarModal = () => {
           }
 
         console.log(formValues)
+
+        // grabacion del evento
+        await startSavingEvent( formValues )
+        
+        closeDateModal()
+
+        setFormSubmitted(false)
     }
 
     return(
@@ -176,7 +183,7 @@ export const CalendarModal = () => {
                 <small className='form-text text-muted'>Informacion adicional</small>
             </div>
 
-            <button className='btn btn-outline-primary btn-block'>
+            <button type='submit' className='btn btn-outline-primary btn-block'>
                 <i className='far fa-save'/>
                 &nbsp;
                 <span>Guardar</span>
